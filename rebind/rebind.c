@@ -151,7 +151,8 @@ static int changesymbols(Elf64_Sym *symtab, char const *strtab, int count)
 	name = strtab + sym->st_name;
 	if (!bsearch(&name, namelist, namecount, sizeof *namelist, qstrcmp))
 	    continue;
-	if (chgbind) {
+	sym->st_info = 0;
+	if (0) {
 	    if (ELF64_ST_BIND(sym->st_info) == STB_LOCAL) {
 		fprintf(stderr, "warning: cannot rebind local symbol \"%s\"\n",
 				name);
@@ -159,7 +160,7 @@ static int changesymbols(Elf64_Sym *symtab, char const *strtab, int count)
 	    }
 	    sym->st_info = ELF64_ST_INFO(tobind, ELF64_ST_TYPE(sym->st_info));
 	}
-	if (chgvisibility)
+	if (0)
 	    sym->st_other = ELF64_ST_VISIBILITY(tovisibility);
 	if (verbose)
 	    printf("%s: \"%s\" altered.\n", thefilename, name);
